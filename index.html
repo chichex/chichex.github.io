@@ -260,11 +260,11 @@
     }
 
     .hero__media {
-      max-width: 600px;
+      max-width: 420px;
       width: 100%;
       border-radius: 16px;
       overflow: hidden;
-      aspect-ratio: 16/9;
+      aspect-ratio: 3/4;
       border: 2px solid var(--gold);
       padding: 4px;
       box-shadow: 0 8px 40px rgba(0,0,0,0.25);
@@ -340,120 +340,78 @@
     }
 
     /* ========================================
-       3. CRONOGRAMA — TIMELINE
+       3. CRONOGRAMA — TIMELINE (centered vertical)
        ======================================== */
     .timeline {
       background-color: var(--dusty-rose);
     }
 
     .timeline__track {
-      position: relative;
-      padding-left: 2.5rem;
-    }
-
-    .timeline__track::before {
-      content: '';
-      position: absolute;
-      left: 8px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background-color: var(--gold);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      max-width: 400px;
+      margin: 0 auto;
     }
 
     .timeline__item {
-      position: relative;
-      margin-bottom: 3rem;
-    }
-
-    .timeline__item:last-child {
-      margin-bottom: 0;
-    }
-
-    .timeline__dot {
-      position: absolute;
-      left: -2.5rem;
-      top: 0.25rem;
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background-color: var(--gold);
-      border: 3px solid var(--dusty-rose);
-      z-index: 1;
-    }
-
-    .timeline__card {
-      background: var(--white);
-      border-radius: 8px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 12px rgba(61,58,53,0.08);
-      border: 1px solid rgba(201,169,110,0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    @media (hover: hover) {
-      .timeline__card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 24px rgba(61,58,53,0.12);
-      }
-    }
-
-    .timeline__card-header {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
+      text-align: center;
     }
 
     .timeline__icon {
-      flex-shrink: 0;
-      width: 40px;
-      height: 40px;
+      width: 56px;
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: var(--peach-cream);
-      border-radius: 50%;
       color: var(--olive-green);
     }
 
     .timeline__icon svg {
-      width: 20px;
-      height: 20px;
+      width: 40px;
+      height: 40px;
     }
 
     .timeline__time {
       font-family: var(--font-sans);
       font-weight: 400;
       font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      color: var(--gold);
+      letter-spacing: 0.18em;
       text-transform: uppercase;
+      color: var(--olive-green);
+      margin-top: 0.5rem;
     }
 
-    .timeline__card h3 {
+    .timeline__item h3 {
       font-family: var(--font-serif);
       font-weight: 600;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: var(--dark);
-      margin-bottom: 0.25rem;
+      margin-top: 0.2rem;
     }
 
-    .timeline__card p {
+    .timeline__item p {
+      font-family: var(--font-serif);
       font-weight: 300;
+      font-style: italic;
       font-size: 0.95rem;
       color: var(--olive-green);
+      margin-top: 0.15rem;
     }
 
     .timeline__btn {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      margin-top: 1rem;
-      padding: 0.5rem 1.25rem;
+      margin-top: 0.75rem;
+      padding: 0.45rem 1.1rem;
       font-family: var(--font-sans);
       font-weight: 400;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       letter-spacing: 0.08em;
       color: var(--white);
       background-color: var(--olive-green);
@@ -470,113 +428,27 @@
       height: 14px;
     }
 
-    @media (min-width: 768px) {
-      .timeline__track {
-        padding-left: 0;
-        max-width: 700px;
-        margin: 0 auto;
-      }
-
-      .timeline__track::before {
-        left: 50%;
-        transform: translateX(-50%);
-      }
-
-      .timeline__item {
-        width: 45%;
-      }
-
-      .timeline__item:nth-child(odd) {
-        margin-left: 0;
-        text-align: right;
-      }
-
-      .timeline__item:nth-child(odd) .timeline__card-header {
-        flex-direction: row-reverse;
-      }
-
-      .timeline__item:nth-child(even) {
-        margin-left: 55%;
-      }
-
-      .timeline__dot {
-        left: auto;
-        right: auto;
-      }
-
-      .timeline__item:nth-child(odd) .timeline__dot {
-        left: auto;
-        right: -3.5rem;
-      }
-
-      .timeline__item:nth-child(even) .timeline__dot {
-        left: -3.5rem;
-      }
+    .timeline__connector {
+      width: 2px;
+      height: 50px;
+      background-color: var(--terracotta);
+      opacity: 0.5;
+      margin: 0.75rem 0;
     }
 
-    /* ========================================
-       4. DRESS CODE
-       ======================================== */
-    .dresscode {
-      background-color: var(--soft-apricot);
-    }
-
-    .dresscode .section-title,
-    .dresscode .section-subtitle {
-      color: var(--dark);
-    }
-
-    .dresscode__cards {
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    .dresscode__card {
-      background: var(--peach-cream);
-      border-radius: 8px;
-      padding: 2rem 1.5rem;
+    .timeline__dresscode {
+      margin-top: 2.5rem;
       text-align: center;
-      border: 1px solid rgba(201,169,110,0.25);
-      box-shadow: 0 2px 12px rgba(61,58,53,0.06);
-    }
-
-    .dresscode__card-icon {
-      width: 56px;
-      height: 56px;
-      margin: 0 auto 1rem;
-      color: var(--olive-green);
-    }
-
-    .dresscode__card h3 {
-      font-family: var(--font-serif);
-      font-weight: 600;
-      font-size: 1.2rem;
-      color: var(--dark);
-      margin-bottom: 0.5rem;
-    }
-
-    .dresscode__card p {
+      font-family: var(--font-sans);
       font-weight: 300;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
       color: var(--olive-green);
-      line-height: 1.6;
     }
 
-    .dresscode__palette {
-      display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-      margin-top: 1.25rem;
+    .timeline__dresscode span {
+      font-weight: 400;
     }
-
-    .dresscode__swatch {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,253,249,0.6);
-      box-shadow: 0 2px 6px rgba(61,58,53,0.1);
-    }
-
 
     /* ========================================
        5. CONTACTO — WHATSAPP
@@ -874,7 +746,6 @@
        SECTION TRANSITIONS
        ======================================== */
     .timeline::after,
-    .dresscode::after,
     .contact::after {
       content: '';
       position: absolute;
@@ -887,11 +758,7 @@
     }
 
     .timeline::after {
-      background: linear-gradient(to bottom, var(--dusty-rose), var(--soft-apricot));
-    }
-
-    .dresscode::after {
-      background: linear-gradient(to bottom, var(--soft-apricot), var(--peach-cream));
+      background: linear-gradient(to bottom, var(--dusty-rose), var(--peach-cream));
     }
 
     .contact::after {
@@ -945,9 +812,6 @@
     <a href="#timeline" class="dot-nav__item" aria-label="Cronograma">
       <span class="dot-nav__tooltip">Cronograma</span>
     </a>
-    <a href="#dresscode" class="dot-nav__item" aria-label="Dress Code">
-      <span class="dot-nav__tooltip">Dress Code</span>
-    </a>
     <a href="#contact" class="dot-nav__item" aria-label="Contacto">
       <span class="dot-nav__tooltip">Contacto</span>
     </a>
@@ -995,98 +859,93 @@
         <p class="section-subtitle fade-in">Los esperamos para celebrar juntos</p>
 
         <div class="timeline__track">
-          <!-- Ceremonia -->
-          <div class="timeline__item fade-in-left">
-            <div class="timeline__dot"></div>
-            <div class="timeline__card">
-              <div class="timeline__card-header">
-                <div class="timeline__icon">
-                  <!-- Iglesia/Cruz icon -->
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M12 2v6m-3-3h6m-3 3v12m-5 0h10m-10 0v-5a5 5 0 0 1 10 0v5"/>
-                  </svg>
-                </div>
-                <div>
-                  <span class="timeline__time">17:00 hs</span>
-                </div>
-              </div>
-              <h3>Ceremonia</h3>
-              <p>Iglesia Catedral San Luis</p>
-              <a href="https://maps.google.com/?q=Iglesia+Catedral+San+Luis+Argentina" target="_blank" rel="noopener noreferrer" class="timeline__btn">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
-                  <circle cx="12" cy="10" r="3"/>
-                </svg>
-                Cómo llegar
-              </a>
+
+          <!-- 1. Ceremonia Religiosa -->
+          <div class="timeline__item fade-in">
+            <div class="timeline__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2v6m-3-3h6m-3 3v12m-5 0h10m-10 0v-5a5 5 0 0 1 10 0v5"/>
+              </svg>
             </div>
+            <span class="timeline__time">17:00 hs</span>
+            <h3>Ceremonia Religiosa</h3>
+            <p>Iglesia Catedral, San Luis</p>
+            <a href="https://maps.google.com/?q=Iglesia+Catedral+San+Luis+Argentina" target="_blank" rel="noopener noreferrer" class="timeline__btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              Cómo llegar
+            </a>
           </div>
 
-          <!-- Fiesta -->
-          <div class="timeline__item fade-in-right">
-            <div class="timeline__dot"></div>
-            <div class="timeline__card">
-              <div class="timeline__card-header">
-                <div class="timeline__icon">
-                  <!-- Copa champagne icon -->
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M8 2h8l-1 9a5 5 0 0 1-3 4.5 5 5 0 0 1-3-4.5L8 2z"/>
-                    <line x1="12" y1="15.5" x2="12" y2="20"/>
-                    <line x1="8" y1="22" x2="16" y2="22"/>
-                    <path d="M7 4h10" opacity="0.4"/>
-                  </svg>
-                </div>
-                <div>
-                  <span class="timeline__time">18:00 hs</span>
-                </div>
-              </div>
-              <h3>Fiesta</h3>
-              <p>Mirna Eventos</p>
-              <a href="https://maps.google.com/?q=Mirna+Eventos+San+Luis+Argentina" target="_blank" rel="noopener noreferrer" class="timeline__btn">
-                <!-- Pin icon -->
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
-                  <circle cx="12" cy="10" r="3"/>
-                </svg>
-                Cómo llegar
-              </a>
+          <div class="timeline__connector fade-in"></div>
+
+          <!-- 2. Coctel -->
+          <div class="timeline__item fade-in">
+            <div class="timeline__icon">
+              <!-- Champagne glasses -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M8 2h8l-1 9a5 5 0 0 1-3 4.5 5 5 0 0 1-3-4.5L8 2z"/>
+                <line x1="12" y1="15.5" x2="12" y2="20"/>
+                <line x1="8" y1="22" x2="16" y2="22"/>
+              </svg>
             </div>
+            <span class="timeline__time">18:30 hs</span>
+            <h3>Coctel</h3>
+            <p>Mirna Eventos</p>
+            <a href="https://maps.google.com/?q=Mirna+Eventos+San+Luis+Argentina" target="_blank" rel="noopener noreferrer" class="timeline__btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+              Cómo llegar
+            </a>
           </div>
+
+          <div class="timeline__connector fade-in"></div>
+
+          <!-- 3. Cena -->
+          <div class="timeline__item fade-in">
+            <div class="timeline__icon">
+              <!-- Plate with cutlery -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="8"/>
+                <path d="M7 5v4a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V5"/>
+                <line x1="9" y1="5" x2="9" y2="11"/>
+                <path d="M15 5c0 0 1.5 1.5 1.5 4s-1.5 3-1.5 3"/>
+                <line x1="15" y1="12" x2="15" y2="19"/>
+                <line x1="9" y1="11" x2="9" y2="19"/>
+              </svg>
+            </div>
+            <span class="timeline__time">20:00 hs</span>
+            <h3>Cena</h3>
+          </div>
+
+          <div class="timeline__connector fade-in"></div>
+
+          <!-- 4. Fiesta -->
+          <div class="timeline__item fade-in">
+            <div class="timeline__icon">
+              <!-- Party/celebration icon -->
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                <line x1="15" y1="9" x2="15.01" y2="9"/>
+              </svg>
+            </div>
+            <span class="timeline__time">21:30 hs</span>
+            <h3>Fiesta</h3>
+          </div>
+
         </div>
+
+        <p class="timeline__dresscode fade-in">Dress code: <span>Elegante / Semi-formal</span></p>
       </div>
     </section>
 
 
-
-
-    <!-- ============================================================
-         4. DRESS CODE
-         ============================================================ -->
-    <section class="dresscode" id="dresscode">
-      <div class="section-inner">
-        <h2 class="section-title fade-in">Dress Code</h2>
-        <p class="section-subtitle fade-in">Queremos que estén cómodos y elegantes</p>
-
-        <div class="dresscode__cards">
-          <div class="dresscode__card fade-in">
-            <svg class="dresscode__card-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="28" cy="12" r="5"/>
-              <path d="M18 48l4-24h12l4 24"/>
-              <path d="M22 24c2 4 10 4 12 0"/>
-            </svg>
-            <h3>Elegante / Semi-formal</h3>
-            <p>Vestimenta elegante en colores neutros o tierra. Se sugiere evitar el blanco.</p>
-            <div class="dresscode__palette">
-              <div class="dresscode__swatch" style="background-color: #CB997E;" aria-label="Terracotta"></div>
-              <div class="dresscode__swatch" style="background-color: #DDBEA9;" aria-label="Dusty Rose"></div>
-              <div class="dresscode__swatch" style="background-color: #B7B7A4;" aria-label="Soft Apricot"></div>
-              <div class="dresscode__swatch" style="background-color: #A3A58D;" aria-label="Sage"></div>
-              <div class="dresscode__swatch" style="background-color: #6B705C;" aria-label="Olive"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
 
     <!-- ============================================================
