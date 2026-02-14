@@ -1,0 +1,14 @@
+# Playwright MCP logs
+.playwright-mcp/
+
+# Screenshots de desarrollo
+*.screenshot.png
+full-page*.png
+local-*.png
+current-*.png
+mobile-*.png
+timeline-*.png
+dresscode-*.png
+
+# OS
+.DS_Store
