@@ -184,7 +184,7 @@
       min-height: 100dvh;
       overflow: hidden;
       padding: 0;
-      background-color: var(--dark);
+      background-color: var(--olive-green);
     }
 
     .hero__text-band {
@@ -192,7 +192,7 @@
       z-index: 2;
       text-align: center;
       padding: 3.5rem 1.25rem 2rem;
-      background: var(--dark);
+      background: var(--olive-green);
     }
 
     .hero__pretitle {
@@ -254,10 +254,10 @@
       z-index: 2;
       background: linear-gradient(
         to bottom,
-        var(--dark) 0%,
+        var(--olive-green) 0%,
         transparent 15%,
         transparent 85%,
-        rgba(61, 58, 53, 0.5) 100%
+        rgba(107, 112, 92, 0.5) 100%
       );
       pointer-events: none;
     }
@@ -279,26 +279,10 @@
     }
 
     /* ========================================
-       DIVIDER ORNAMENT
-       ======================================== */
-    .divider {
-      display: flex;
-      justify-content: center;
-      padding: 1rem 0;
-      overflow: hidden;
-    }
-
-    .divider svg {
-      width: 200px;
-      height: auto;
-      color: var(--gold);
-    }
-
-    /* ========================================
        3. CRONOGRAMA — TIMELINE
        ======================================== */
     .timeline {
-      background-color: var(--peach-cream);
+      background-color: var(--dusty-rose);
     }
 
     .timeline__track {
@@ -333,7 +317,7 @@
       height: 18px;
       border-radius: 50%;
       background-color: var(--gold);
-      border: 3px solid var(--peach-cream);
+      border: 3px solid var(--dusty-rose);
       z-index: 1;
     }
 
@@ -462,42 +446,19 @@
     }
 
     /* ========================================
-       PARALLAX BAND
-       ======================================== */
-    .parallax-band {
-      height: 350px;
-      background-image: url('pareja-campo.jpeg');
-      background-attachment: fixed;
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      position: relative;
-    }
-
-    .parallax-band::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(61,58,53,0.25);
-    }
-
-    @supports (-webkit-touch-callout: none) {
-      .parallax-band {
-        background-attachment: scroll;
-      }
-    }
-
-    /* ========================================
        4. DRESS CODE
        ======================================== */
     .dresscode {
-      background-color: var(--white);
+      background-color: var(--soft-apricot);
+    }
+
+    .dresscode .section-title,
+    .dresscode .section-subtitle {
+      color: var(--dark);
     }
 
     .dresscode__cards {
-      display: grid;
-      gap: 1.5rem;
-      max-width: 600px;
+      max-width: 500px;
       margin: 0 auto;
     }
 
@@ -532,18 +493,17 @@
       line-height: 1.6;
     }
 
-    @media (min-width: 768px) {
-      .dresscode__cards {
-        grid-template-columns: 1fr 1fr;
-        max-width: 700px;
-      }
-    }
 
     /* ========================================
        5. CONTACTO — WHATSAPP
        ======================================== */
     .contact {
       background-color: var(--peach-cream);
+    }
+
+    .contact .section-title,
+    .contact .section-subtitle {
+      color: var(--dark);
     }
 
     .contact__buttons {
@@ -565,7 +525,7 @@
       font-size: 0.95rem;
       letter-spacing: 0.05em;
       color: var(--white);
-      background-color: #25D366;
+      background-color: var(--olive-green);
       border-radius: 50px;
       transition: background-color 0.3s ease, transform 0.2s ease;
       width: 100%;
@@ -573,7 +533,7 @@
     }
 
     .contact__btn:hover {
-      background-color: #1ebe5a;
+      background-color: var(--dark);
       transform: translateY(-1px);
     }
 
@@ -587,7 +547,12 @@
        6. DATOS DE REGALO
        ======================================== */
     .gift {
-      background-color: var(--white);
+      background-color: var(--sage-fern);
+    }
+
+    .gift .section-title,
+    .gift .section-subtitle {
+      color: var(--white);
     }
 
     .gift__card {
@@ -603,6 +568,7 @@
       border-radius: 6px;
       padding: 2rem 1.5rem;
       text-align: center;
+      background: var(--white);
     }
 
     .gift__label {
@@ -891,15 +857,6 @@
       </div>
     </section>
 
-    <!-- DIVIDER -->
-    <div class="divider" aria-hidden="true">
-      <svg viewBox="0 0 200 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 15 Q25 0 50 15 Q75 30 100 15 Q125 0 150 15 Q175 30 200 15" stroke="currentColor" stroke-width="1" fill="none"/>
-        <circle cx="100" cy="15" r="3" fill="currentColor"/>
-        <circle cx="70" cy="15" r="1.5" fill="currentColor" opacity="0.5"/>
-        <circle cx="130" cy="15" r="1.5" fill="currentColor" opacity="0.5"/>
-      </svg>
-    </div>
 
     <!-- ============================================================
          3. CRONOGRAMA
@@ -964,28 +921,8 @@
       </div>
     </section>
 
-    <!-- DIVIDER -->
-    <div class="divider" aria-hidden="true">
-      <svg viewBox="0 0 200 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 15 Q25 0 50 15 Q75 30 100 15 Q125 0 150 15 Q175 30 200 15" stroke="currentColor" stroke-width="1" fill="none"/>
-        <circle cx="100" cy="15" r="3" fill="currentColor"/>
-        <circle cx="70" cy="15" r="1.5" fill="currentColor" opacity="0.5"/>
-        <circle cx="130" cy="15" r="1.5" fill="currentColor" opacity="0.5"/>
-      </svg>
-    </div>
 
-    <!-- PARALLAX BAND -->
-    <div class="parallax-band" role="img" aria-label="Guadalupe y Ayrton en el campo"></div>
 
-    <!-- DIVIDER -->
-    <div class="divider" aria-hidden="true">
-      <svg viewBox="0 0 200 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 15 Q25 0 50 15 Q75 30 100 15 Q125 0 150 15 Q175 30 200 15" stroke="currentColor" stroke-width="1" fill="none"/>
-        <circle cx="100" cy="15" r="3" fill="currentColor"/>
-        <circle cx="70" cy="15" r="1.5" fill="currentColor" opacity="0.5"/>
-        <circle cx="130" cy="15" r="1.5" fill="currentColor" opacity="0.5"/>
-      </svg>
-    </div>
 
     <!-- ============================================================
          4. DRESS CODE
@@ -996,44 +933,19 @@
         <p class="section-subtitle fade-in">Elegante / Semi-formal</p>
 
         <div class="dresscode__cards">
-          <!-- Caballeros -->
           <div class="dresscode__card fade-in">
             <svg class="dresscode__card-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 8h16l3 14-7 2v24H24V24l-7-2z"/>
-              <path d="M24 8l4 14 4-14"/>
-              <path d="M28 22v6"/>
-              <circle cx="28" cy="30" r="1" fill="currentColor"/>
-              <circle cx="28" cy="36" r="1" fill="currentColor"/>
-              <circle cx="28" cy="42" r="1" fill="currentColor"/>
-              <path d="M20 8c0-3 3-5 8-5s8 2 8 5"/>
+              <circle cx="28" cy="12" r="5"/>
+              <path d="M18 48l4-24h12l4 24"/>
+              <path d="M22 24c2 4 10 4 12 0"/>
             </svg>
-            <h3>Caballeros</h3>
-            <p>Traje o pantalón de vestir con camisa. Colores neutros o tierra.</p>
-          </div>
-
-          <!-- Damas -->
-          <div class="dresscode__card fade-in">
-            <svg class="dresscode__card-icon" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M20 16c0-5 3.5-10 8-10s8 5 8 10c0 4-2 7-4 9l6 23H18l6-23c-2-2-4-5-4-9z"/>
-              <path d="M22 48h12"/>
-              <path d="M24 16c0 2 1.5 4 4 4s4-2 4-4"/>
-            </svg>
-            <h3>Damas</h3>
-            <p>Vestido largo o midi. Se sugiere evitar el color blanco.</p>
+            <h3>Elegante / Semi-formal</h3>
+            <p>Vestimenta elegante en colores neutros o tierra. Se sugiere evitar el blanco.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- DIVIDER -->
-    <div class="divider" aria-hidden="true">
-      <svg viewBox="0 0 200 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 15 Q25 0 50 15 Q75 30 100 15 Q125 0 150 15 Q175 30 200 15" stroke="currentColor" stroke-width="1" fill="none"/>
-        <circle cx="100" cy="15" r="3" fill="currentColor"/>
-        <circle cx="70" cy="15" r="1.5" fill="currentColor" opacity="0.5"/>
-        <circle cx="130" cy="15" r="1.5" fill="currentColor" opacity="0.5"/>
-      </svg>
-    </div>
 
     <!-- ============================================================
          5. CONTACTO
@@ -1062,15 +974,6 @@
       </div>
     </section>
 
-    <!-- DIVIDER -->
-    <div class="divider" aria-hidden="true">
-      <svg viewBox="0 0 200 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 15 Q25 0 50 15 Q75 30 100 15 Q125 0 150 15 Q175 30 200 15" stroke="currentColor" stroke-width="1" fill="none"/>
-        <circle cx="100" cy="15" r="3" fill="currentColor"/>
-        <circle cx="70" cy="15" r="1.5" fill="currentColor" opacity="0.5"/>
-        <circle cx="130" cy="15" r="1.5" fill="currentColor" opacity="0.5"/>
-      </svg>
-    </div>
 
     <!-- ============================================================
          6. DATOS DE REGALO
@@ -1111,7 +1014,7 @@
     <p class="footer__names">Guadalupe &amp; Ayrton</p>
     <p class="footer__date">3 . 10 . 26</p>
     <!-- CONFIGURAR: Reemplazar con la frase que quieran -->
-    <p class="footer__phrase">&ldquo;El amor no se mira el uno al otro, sino juntos en la misma dirección.&rdquo;</p>
+    <p class="footer__phrase">&ldquo;Acompañanos en nuestro sí para siempre&rdquo;</p>
   </footer>
 
   <!-- ============================================================
