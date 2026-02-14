@@ -108,7 +108,7 @@
       font-weight: 300;
       font-size: 1.1rem;
       text-align: center;
-      color: var(--soft-apricot);
+      color: var(--olive-green);
       margin-bottom: 2.5rem;
     }
 
@@ -174,24 +174,60 @@
     }
 
     /* ========================================
-       1. HERO
+       1. HERO — Split layout: text top + media bottom
        ======================================== */
     .hero {
       position: relative;
-      height: 100vh;
-      height: 100dvh;
-      min-height: 600px;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+      min-height: 100vh;
+      min-height: 100dvh;
       overflow: hidden;
       padding: 0;
+      background-color: var(--dark);
+    }
+
+    .hero__text-band {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 3.5rem 1.25rem 2rem;
+      background: var(--dark);
+    }
+
+    .hero__pretitle {
+      font-family: var(--font-script);
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+    }
+
+    .hero__title {
+      font-family: var(--font-script);
+      font-size: clamp(2.6rem, 7vw, 4.5rem);
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      color: var(--peach-cream);
+    }
+
+    .hero__date {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: clamp(0.8rem, 1.8vw, 1.05rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--dusty-rose);
+    }
+
+    .hero__media-wrapper {
+      position: relative;
+      flex: 1;
+      overflow: hidden;
     }
 
     .hero__media {
       position: absolute;
       inset: 0;
-      z-index: 0;
     }
 
     .hero__video,
@@ -199,6 +235,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 30%;
     }
 
     .hero__poster {
@@ -211,58 +248,28 @@
       z-index: 1;
     }
 
-    .hero__overlay {
+    .hero__media-fade {
       position: absolute;
       inset: 0;
       z-index: 2;
       background: linear-gradient(
         to bottom,
-        rgba(61, 58, 53, 0.3) 0%,
-        rgba(61, 58, 53, 0.15) 40%,
-        rgba(61, 58, 53, 0.4) 100%
+        var(--dark) 0%,
+        transparent 15%,
+        transparent 85%,
+        rgba(61, 58, 53, 0.5) 100%
       );
-    }
-
-    .hero__content {
-      position: relative;
-      z-index: 3;
-      text-align: center;
-      color: var(--white);
-      padding: 1rem;
-    }
-
-    .hero__pretitle {
-      font-family: var(--font-script);
-      font-size: clamp(1.5rem, 4vw, 2.2rem);
-      margin-bottom: 0.5rem;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
-
-    .hero__title {
-      font-family: var(--font-script);
-      font-size: clamp(2.8rem, 8vw, 5.5rem);
-      line-height: 1.2;
-      margin-bottom: 1rem;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
-    }
-
-    .hero__date {
-      font-family: var(--font-sans);
-      font-weight: 300;
-      font-size: clamp(0.9rem, 2vw, 1.2rem);
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+      pointer-events: none;
     }
 
     .hero__chevron {
       position: absolute;
-      bottom: 2rem;
+      bottom: 1.5rem;
       left: 50%;
       transform: translateX(-50%);
       z-index: 3;
       animation: chevronBounce 2s ease-in-out infinite;
-      color: var(--white);
+      color: var(--peach-cream);
       opacity: 0.8;
     }
 
@@ -285,53 +292,6 @@
       width: 200px;
       height: auto;
       color: var(--gold);
-    }
-
-    /* ========================================
-       2. NUESTRA HISTORIA
-       ======================================== */
-    .story {
-      background-color: var(--white);
-    }
-
-    .story__grid {
-      display: grid;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .story__image-wrapper {
-      border: 2px solid var(--gold);
-      padding: 6px;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .story__image-wrapper img {
-      border-radius: 2px;
-      width: 100%;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-      background-color: var(--peach-cream);
-    }
-
-    .story__text h2 {
-      margin-bottom: 1.5rem;
-    }
-
-    .story__text p {
-      font-weight: 300;
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: var(--dark);
-      margin-bottom: 1rem;
-    }
-
-    @media (min-width: 768px) {
-      .story__grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-      }
     }
 
     /* ========================================
@@ -429,7 +389,7 @@
     .timeline__card p {
       font-weight: 300;
       font-size: 0.95rem;
-      color: var(--soft-apricot);
+      color: var(--olive-green);
     }
 
     .timeline__btn {
@@ -651,7 +611,7 @@
       font-size: 0.85rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--soft-apricot);
+      color: var(--olive-green);
       margin-bottom: 0.5rem;
     }
 
@@ -889,9 +849,6 @@
     <a href="#hero" class="dot-nav__item is-active" aria-label="Inicio">
       <span class="dot-nav__tooltip">Inicio</span>
     </a>
-    <a href="#story" class="dot-nav__item" aria-label="Nuestra Historia">
-      <span class="dot-nav__tooltip">Nuestra Historia</span>
-    </a>
     <a href="#timeline" class="dot-nav__item" aria-label="Cronograma">
       <span class="dot-nav__tooltip">Cronograma</span>
     </a>
@@ -912,53 +869,25 @@
          1. HERO
          ============================================================ -->
     <section class="hero" id="hero">
-      <div class="hero__media">
-        <img class="hero__poster" src="espejo-atardecer.jpeg" alt="Guadalupe y Ayrton al atardecer">
-        <video class="hero__video" muted autoplay loop playsinline preload="metadata"
-               poster="espejo-atardecer.jpeg">
-          <source src="hero-video.MOV" type="video/quicktime">
-          <source src="hero-video.mp4" type="video/mp4">
-        </video>
-      </div>
-      <div class="hero__overlay" aria-hidden="true"></div>
-      <div class="hero__content">
+      <div class="hero__text-band">
         <p class="hero__pretitle">Nos Casamos</p>
         <h1 class="hero__title">Guadalupe &amp; Ayrton</h1>
         <p class="hero__date">3 de Octubre, 2026</p>
       </div>
-      <a href="#story" class="hero__chevron" aria-label="Ir a la siguiente sección">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="6 9 12 15 18 9"/>
-        </svg>
-      </a>
-    </section>
-
-    <!-- DIVIDER -->
-    <div class="divider" aria-hidden="true">
-      <svg viewBox="0 0 200 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 15 Q25 0 50 15 Q75 30 100 15 Q125 0 150 15 Q175 30 200 15" stroke="currentColor" stroke-width="1" fill="none"/>
-        <circle cx="100" cy="15" r="3" fill="currentColor"/>
-        <circle cx="70" cy="15" r="1.5" fill="currentColor" opacity="0.5"/>
-        <circle cx="130" cy="15" r="1.5" fill="currentColor" opacity="0.5"/>
-      </svg>
-    </div>
-
-    <!-- ============================================================
-         2. NUESTRA HISTORIA
-         ============================================================ -->
-    <section class="story" id="story">
-      <div class="section-inner">
-        <div class="story__grid">
-          <div class="story__image-wrapper fade-in">
-            <img src="beso-primer-plano.jpeg" alt="Guadalupe y Ayrton besándose en primer plano">
-          </div>
-          <div class="story__text fade-in">
-            <h2 class="section-title">Nuestra Historia</h2>
-            <!-- CONFIGURAR: Reemplazar con su historia -->
-            <p>Nos conocimos cuando menos lo esperábamos, y desde ese momento supimos que algo especial estaba comenzando. Entre risas, mates y kilómetros de distancia, fuimos construyendo una historia que hoy nos trae hasta acá.</p>
-            <p>Después de años de aventuras juntos, decidimos dar el paso más importante de nuestras vidas. Y queremos compartir ese momento con vos, que sos parte fundamental de nuestra historia.</p>
-          </div>
+      <div class="hero__media-wrapper">
+        <div class="hero__media">
+          <img class="hero__poster" src="espejo-atardecer.jpeg" alt="Guadalupe y Ayrton al atardecer">
+          <video class="hero__video" muted autoplay loop playsinline preload="metadata"
+                 poster="espejo-atardecer.jpeg">
+            <source src="hero-video.mp4" type="video/mp4">
+          </video>
         </div>
+        <div class="hero__media-fade" aria-hidden="true"></div>
+        <a href="#timeline" class="hero__chevron" aria-label="Ir a la siguiente sección">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </a>
       </div>
     </section>
 
