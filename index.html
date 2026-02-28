@@ -14,25 +14,39 @@
   <meta name="twitter:image" content="https://chichex.github.io/espejo-atardecer.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Great+Vibes&family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Lavishly+Yours&family=Lexend+Zetta:wght@300;400&display=swap" rel="stylesheet">
   <style>
+    /* ========================================
+       FONTS
+       ======================================== */
+    @font-face {
+      font-family: 'Boheme Floral';
+      src: url('Boheme Floral.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
     /* ========================================
        DESIGN SYSTEM — CSS Variables
        ======================================== */
     :root {
-      --terracotta: #CB997E;
+      --terracotta: #9C5540;
       --dusty-rose: #DDBEA9;
       --peach-cream: #FFE8D6;
       --soft-apricot: #B7B7A4;
-      --sage-fern: #A3A58D;
       --olive-green: #6B705C;
       --white: #FFFDF9;
       --dark: #3D3A35;
       --gold: #C9A96E;
+      --paper-bg: #F5F0E8;
+      --card-bg: #A5A58D;
+      --chalk-white: #FAF7F2;
 
-      --font-script: 'Great Vibes', cursive;
+      --font-boheme: 'Boheme Floral', cursive;
+      --font-script: 'Lavishly Yours', cursive;
       --font-serif: 'Cormorant Garamond', serif;
-      --font-sans: 'Josefin Sans', sans-serif;
+      --font-sans: 'Lexend Zetta', sans-serif;
     }
 
     /* ========================================
@@ -51,21 +65,23 @@
     body {
       font-family: var(--font-serif);
       font-weight: 400;
-      color: var(--dark);
-      background-color: var(--white);
+      color: var(--terracotta);
+      background-color: #ffffff;
+      background-image: none;
       line-height: 1.7;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Grain texture overlay */
+    /* Paper grain texture overlay */
     body::after {
       content: '';
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 9999;
-      opacity: 0.035;
+      opacity: 0.05;
+      mix-blend-mode: multiply;
       background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
     }
 
@@ -103,11 +119,13 @@
     }
 
     h2.section-title {
-      font-family: var(--font-script);
-      font-size: clamp(2rem, 5vw, 3rem);
-      color: var(--olive-green);
+      font-family: var(--font-boheme);
+      font-size: clamp(2.4rem, 6vw, 3.5rem);
+      color: #756256;
       text-align: center;
       margin-bottom: 1rem;
+      line-height: 1.3;
+      font-weight: normal;
     }
 
     .section-subtitle {
@@ -115,7 +133,7 @@
       font-weight: 300;
       font-size: 1.1rem;
       text-align: center;
-      color: var(--olive-green);
+      color: #756256;
       margin-bottom: 2.5rem;
     }
 
@@ -179,13 +197,8 @@
         transform: none;
         transition: none;
       }
-      .hero__chevron {
-        animation: none !important;
-      }
-      .hero__pretitle,
       .hero__title,
-      .hero__date,
-      .hero__media {
+      .hero__date {
         animation: none !important;
       }
       .music-btn.is-playing .music-btn__ring {
@@ -197,7 +210,7 @@
        SECTION COMMON
        ======================================== */
     section {
-      padding: 4rem 1.25rem;
+      padding: 2rem 1.25rem;
       position: relative;
     }
 
@@ -207,109 +220,97 @@
     }
 
     /* ========================================
-       1. HERO — Split layout: text top + media bottom
+       1. HERO — Paper invitation style
        ======================================== */
     .hero {
       position: relative;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      min-height: 100dvh;
       overflow: hidden;
       padding: 0;
-      background-color: var(--olive-green);
+      background-color: var(--paper-bg);
     }
 
-    .hero__text-band {
+    .hero__photo-wrapper {
       position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 3.5rem 1.25rem 2rem;
-      background: var(--olive-green);
+      width: 100%;
+      line-height: 0;
+      overflow: hidden;
+      aspect-ratio: 1724 / 3429;
     }
 
-    .hero__pretitle {
-      font-family: var(--font-script);
-      font-size: clamp(1.4rem, 3.5vw, 2rem);
-      color: var(--gold);
-      margin-bottom: 0.4rem;
+    /* Torn paper frame overlay on video */
+    .hero__photo-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      z-index: 3;
+      pointer-events: none;
+      background: url('papel rasgado doble más espacio - papel chico.png') center / calc(100% + 8px) calc(100% + 8px) no-repeat;
+    }
+
+    .hero__poster,
+    .hero__video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      object-position: center;
+      background-color: var(--paper-bg);
+    }
+
+    .hero__video {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+    }
+
+    .hero__overlay-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 4;
+      text-align: center;
+      padding: 1.5rem 1.25rem 0;
+    }
+
+    .hero__overlay-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 4;
+      text-align: center;
+      padding: 0 1.25rem 2rem;
     }
 
     .hero__title {
-      font-family: var(--font-script);
-      font-size: clamp(2.6rem, 7vw, 4.5rem);
-      line-height: 1.2;
+      font-family: var(--font-boheme);
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      line-height: 1.3;
       margin-bottom: 0.75rem;
-      color: var(--peach-cream);
+      color: #756256;
+      font-weight: normal;
     }
 
     .hero__date {
       font-family: var(--font-sans);
       font-weight: 300;
-      font-size: clamp(0.8rem, 1.8vw, 1.05rem);
+      font-size: clamp(0.65rem, 1.5vw, 0.85rem);
       letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--dusty-rose);
+      color: #756256;
     }
 
-    .hero__media-wrapper {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      padding: 2rem 1.25rem 1rem;
-    }
-
-    .hero__media {
-      max-width: 420px;
-      width: 100%;
-      border-radius: 16px;
-      overflow: hidden;
-      aspect-ratio: 3/4;
-      border: 2px solid var(--gold);
-      padding: 4px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.25);
-    }
-
-    .hero__media-inner {
-      border-radius: 12px;
-      overflow: hidden;
-      width: 100%;
-      height: 100%;
-    }
-
-    .hero__video,
-    .hero__poster {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 30%;
-    }
-
-    .hero__poster {
-      position: absolute;
-      inset: 0;
-    }
-
-    .hero__video {
-      position: relative;
-      z-index: 1;
-      filter: brightness(0.95) saturate(0.9);
-    }
-
-    .hero__chevron {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      padding: 1rem 0 1.5rem;
-      animation: chevronBounce 2s ease-in-out infinite;
-      color: var(--peach-cream);
-      opacity: 0.8;
-      transition: opacity 0.5s ease;
-    }
-
-    @keyframes chevronBounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(10px); }
+    .hero__phrase {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: #756256;
+      line-height: 1.6;
     }
 
     /* Hero stagger animations */
@@ -318,32 +319,19 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes heroScaleIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .hero__pretitle {
+    .hero__title {
       animation: heroFadeIn 0.8s ease-out 0.3s both;
     }
 
-    .hero__title {
-      animation: heroFadeIn 0.8s ease-out 0.6s both;
-    }
-
     .hero__date {
-      animation: heroFadeIn 0.8s ease-out 0.9s both;
-    }
-
-    .hero__media {
-      animation: heroScaleIn 0.8s ease-out 1.2s both;
+      animation: heroFadeIn 0.8s ease-out 0.6s both;
     }
 
     /* ========================================
        3. CRONOGRAMA — TIMELINE (centered vertical)
        ======================================== */
     .timeline {
-      background-color: var(--dusty-rose);
+      background-color: transparent;
     }
 
     .timeline__track {
@@ -351,8 +339,10 @@
       flex-direction: column;
       align-items: center;
       gap: 0;
-      max-width: 400px;
-      margin: 0 auto;
+      margin: 0 -1.25rem;
+      background: linear-gradient(rgba(107,112,92,0.75), rgba(107,112,92,0.75)), url('papel fondo-01.png') center / cover;
+      padding: 2.5rem 1.5rem;
+      border-radius: 0;
     }
 
     .timeline__item {
@@ -368,7 +358,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--olive-green);
+      color: var(--chalk-white);
     }
 
     .timeline__icon svg {
@@ -379,10 +369,10 @@
     .timeline__time {
       font-family: var(--font-sans);
       font-weight: 400;
-      font-size: 0.85rem;
+      font-size: 0.7rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--olive-green);
+      color: var(--chalk-white);
       margin-top: 0.5rem;
     }
 
@@ -390,7 +380,7 @@
       font-family: var(--font-serif);
       font-weight: 600;
       font-size: 1.3rem;
-      color: var(--dark);
+      color: var(--chalk-white);
       margin-top: 0.2rem;
     }
 
@@ -399,7 +389,8 @@
       font-weight: 300;
       font-style: italic;
       font-size: 0.95rem;
-      color: var(--olive-green);
+      color: var(--chalk-white);
+      opacity: 0.85;
       margin-top: 0.15rem;
     }
 
@@ -411,16 +402,19 @@
       padding: 0.45rem 1.1rem;
       font-family: var(--font-sans);
       font-weight: 400;
-      font-size: 0.8rem;
+      font-size: 0.65rem;
       letter-spacing: 0.08em;
-      color: var(--white);
-      background-color: var(--olive-green);
+      text-transform: uppercase;
+      color: var(--chalk-white);
+      background-color: transparent;
+      border: 1.5px solid var(--chalk-white);
       border-radius: 4px;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     .timeline__btn:hover {
-      background-color: var(--dark);
+      background-color: var(--chalk-white);
+      color: var(--card-bg);
     }
 
     .timeline__btn svg {
@@ -431,19 +425,21 @@
     .timeline__connector {
       width: 2px;
       height: 50px;
-      background-color: var(--terracotta);
-      opacity: 0.5;
+      background-color: var(--chalk-white);
+      opacity: 0.3;
       margin: 0.75rem 0;
     }
 
     .timeline__dresscode {
-      margin-top: 2.5rem;
       text-align: center;
       font-family: var(--font-sans);
       font-weight: 300;
-      font-size: 0.85rem;
+      font-size: 0.7rem;
       letter-spacing: 0.12em;
-      color: var(--olive-green);
+      text-transform: uppercase;
+      color: var(--chalk-white);
+      background: none;
+      padding: 0;
     }
 
     .timeline__dresscode span {
@@ -454,12 +450,7 @@
        5. CONTACTO — WHATSAPP
        ======================================== */
     .contact {
-      background-color: var(--peach-cream);
-    }
-
-    .contact .section-title,
-    .contact .section-subtitle {
-      color: var(--dark);
+      background-color: transparent;
     }
 
     .contact__buttons {
@@ -467,8 +458,10 @@
       flex-direction: column;
       gap: 1rem;
       align-items: center;
-      max-width: 400px;
-      margin: 0 auto;
+      background-color: #ffffff;
+      padding: 2rem 1.5rem;
+      border-radius: 0;
+      margin: 0 -1.25rem;
     }
 
     .contact__btn {
@@ -478,18 +471,21 @@
       padding: 0.9rem 1.75rem;
       font-family: var(--font-sans);
       font-weight: 400;
-      font-size: 0.95rem;
+      font-size: 0.7rem;
       letter-spacing: 0.05em;
-      color: var(--white);
-      background-color: var(--olive-green);
-      border-radius: 50px;
-      transition: background-color 0.3s ease, transform 0.2s ease;
+      text-transform: uppercase;
+      color: var(--olive-green);
+      background: transparent;
+      border: 1.5px solid var(--olive-green);
+      border-radius: 4px;
+      transition: all 0.3s ease, transform 0.2s ease;
       width: 100%;
       justify-content: center;
     }
 
     .contact__btn:hover {
-      background-color: var(--dark);
+      background-color: var(--olive-green);
+      color: var(--chalk-white);
       transform: translateY(-1px);
     }
 
@@ -503,39 +499,28 @@
        6. DATOS DE REGALO
        ======================================== */
     .gift {
-      background-color: var(--sage-fern);
-    }
-
-    .gift .section-title,
-    .gift .section-subtitle {
-      color: var(--white);
-      text-shadow: 0 1px 2px rgba(0,0,0,0.15);
-    }
-
-    .gift .section-subtitle {
-      font-weight: 400;
+      background-color: transparent;
     }
 
     .gift__card {
-      max-width: 450px;
-      margin: 0 auto;
-      border: 2px solid var(--gold);
-      border-radius: 8px;
-      padding: 4px;
+      background-color: #ffffff;
+      border: none;
+      border-radius: 0;
+      margin: 0 -1.25rem;
     }
 
     .gift__card-inner {
-      border: 1px solid var(--gold);
-      border-radius: 6px;
+      border: none;
+      border-radius: 12px;
       padding: 2rem 1.5rem;
       text-align: center;
-      background: var(--white);
+      background: transparent;
     }
 
     .gift__label {
       font-family: var(--font-sans);
       font-weight: 300;
-      font-size: 0.85rem;
+      font-size: 0.7rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--olive-green);
@@ -546,7 +531,7 @@
       font-family: var(--font-serif);
       font-weight: 500;
       font-size: 1.5rem;
-      color: var(--dark);
+      color: var(--olive-green);
       margin-bottom: 1.5rem;
       word-break: break-all;
     }
@@ -558,11 +543,12 @@
       padding: 0.65rem 1.5rem;
       font-family: var(--font-sans);
       font-weight: 400;
-      font-size: 0.9rem;
+      font-size: 0.7rem;
       letter-spacing: 0.06em;
-      color: var(--gold);
+      text-transform: uppercase;
+      color: var(--olive-green);
       background: transparent;
-      border: 1.5px solid var(--gold);
+      border: 1.5px solid var(--olive-green);
       border-radius: 4px;
       transition: all 0.3s ease, transform 0.2s ease;
     }
@@ -572,8 +558,8 @@
     }
 
     .gift__copy-btn:hover {
-      background-color: var(--gold);
-      color: var(--white);
+      background-color: var(--olive-green);
+      color: var(--chalk-white);
     }
 
     .gift__copy-btn svg {
@@ -584,12 +570,14 @@
     .gift__copy-btn.is-copied {
       background-color: var(--olive-green);
       border-color: var(--olive-green);
-      color: var(--white);
+      color: var(--chalk-white);
     }
 
     .gift__feedback {
       font-family: var(--font-sans);
-      font-size: 0.8rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       color: var(--olive-green);
       margin-top: 0.75rem;
       min-height: 1.2em;
@@ -600,87 +588,26 @@
        ======================================== */
     .footer {
       background-color: var(--olive-green);
-      color: var(--peach-cream);
+      color: var(--chalk-white);
       text-align: center;
       padding: 3rem 1.25rem;
     }
 
     .footer__names {
-      font-family: var(--font-script);
-      font-size: 1.8rem;
+      font-family: var(--font-boheme);
+      font-size: 2.2rem;
+      font-weight: normal;
       margin-bottom: 0.5rem;
     }
 
     .footer__date {
       font-family: var(--font-sans);
       font-weight: 300;
-      font-size: 0.85rem;
+      font-size: 0.7rem;
       letter-spacing: 0.2em;
-      margin-bottom: 1rem;
+      text-transform: uppercase;
     }
 
-    .footer__phrase {
-      font-family: var(--font-serif);
-      font-weight: 300;
-      font-style: italic;
-      font-size: 1rem;
-      opacity: 0.8;
-    }
-
-    /* ========================================
-       MUSIC BUTTON (fixed)
-       ======================================== */
-    .music-btn {
-      position: fixed;
-      top: 1.25rem;
-      left: 1.25rem;
-      z-index: 100;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 1.5px solid var(--gold);
-      background: rgba(255,253,249,0.2);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--white);
-      transition: background 0.3s ease;
-    }
-
-    .music-btn:hover {
-      background: rgba(255,253,249,0.35);
-    }
-
-    .music-btn svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    .music-btn__icon-play { display: none; }
-    .music-btn__icon-mute { display: block; }
-
-    .music-btn.is-playing .music-btn__icon-play { display: block; }
-    .music-btn.is-playing .music-btn__icon-mute { display: none; }
-
-    .music-btn__ring {
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      border: 1.5px solid var(--gold);
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .music-btn.is-playing .music-btn__ring {
-      animation: pulseRing 2s ease-out infinite;
-    }
-
-    @keyframes pulseRing {
-      0% { transform: scale(1); opacity: 0.6; }
-      100% { transform: scale(1.5); opacity: 0; }
-    }
 
     /* ========================================
        DOT NAVIGATION (desktop)
@@ -725,10 +652,11 @@
         top: 50%;
         transform: translateY(-50%);
         background: var(--dark);
-        color: var(--white);
+        color: var(--chalk-white);
         font-family: var(--font-sans);
-        font-size: 0.7rem;
+        font-size: 0.6rem;
         letter-spacing: 0.05em;
+        text-transform: uppercase;
         padding: 0.3rem 0.6rem;
         border-radius: 3px;
         white-space: nowrap;
@@ -745,64 +673,20 @@
     /* ========================================
        SECTION TRANSITIONS
        ======================================== */
-    .timeline::after,
-    .contact::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .timeline::after {
-      background: linear-gradient(to bottom, var(--dusty-rose), var(--peach-cream));
-    }
-
-    .contact::after {
-      background: linear-gradient(to bottom, var(--peach-cream), var(--sage-fern));
-    }
+    /* removed gift-to-footer gradient */
 
     /* ========================================
        RESPONSIVE
        ======================================== */
-    @media (max-width: 767px) {
-      .hero__media {
-        max-width: 90vw;
-      }
-    }
-
     @media (min-width: 1024px) {
       section {
-        padding: 6rem 2rem;
+        padding: 3rem 2rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- ======== AUDIO (global) ======== -->
-  <audio id="bgMusic" preload="none" loop>
-    <source src="selfless.mp3" type="audio/mpeg">
-  </audio>
-
-  <!-- ======== MUSIC BUTTON ======== -->
-  <button class="music-btn" id="musicBtn" type="button" aria-label="Reproducir música de fondo">
-    <span class="music-btn__ring" aria-hidden="true"></span>
-    <!-- Muted icon (note + X) -->
-    <svg class="music-btn__icon-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M9 18V5l12-2v13"/>
-      <circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
-      <line x1="1" y1="1" x2="23" y2="23" stroke-width="2"/>
-    </svg>
-    <!-- Playing icon (note + waves) -->
-    <svg class="music-btn__icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M9 18V5l12-2v13"/>
-      <circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
-    </svg>
-  </button>
 
   <!-- ======== DOT NAVIGATION ======== -->
   <nav class="dot-nav" id="dotNav" aria-label="Navegación por secciones">
@@ -826,27 +710,22 @@
          1. HERO
          ============================================================ -->
     <section class="hero" id="hero">
-      <div class="hero__text-band">
-        <p class="hero__pretitle">Nos Casamos</p>
-        <h1 class="hero__title">Guadalupe &amp; Ayrton</h1>
-        <p class="hero__date">3 de Octubre, 2026</p>
-      </div>
-      <div class="hero__media-wrapper">
-        <div class="hero__media">
-          <div class="hero__media-inner">
-            <img class="hero__poster" src="espejo-atardecer.png" alt="Guadalupe y Ayrton al atardecer">
-            <video class="hero__video" muted autoplay loop playsinline preload="metadata"
-                   poster="espejo-atardecer.png">
-              <source src="hero-video.mp4" type="video/mp4">
-            </video>
-          </div>
+      <div class="hero__photo-wrapper">
+        <img class="hero__poster" src="espejo-atardecer.png" alt="Guadalupe y Ayrton — Nos casamos">
+        <video class="hero__video" muted autoplay loop playsinline preload="metadata"
+               poster="espejo-atardecer.png">
+          <source src="hero-video.mp4" type="video/mp4">
+        </video>
+
+        <!-- Texto superpuesto sobre el video -->
+        <div class="hero__overlay-top">
+          <h1 class="hero__title">Guadalupe y Ayrton</h1>
+          <p class="hero__date">3 . 10 . 26</p>
+        </div>
+        <div class="hero__overlay-bottom">
+          <p class="hero__phrase">Acompañanos en nuestro sí para siempre.</p>
         </div>
       </div>
-      <a href="#timeline" class="hero__chevron" id="heroChevron" aria-label="Ir a la siguiente sección">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="6 9 12 15 18 9"/>
-        </svg>
-      </a>
     </section>
 
 
@@ -939,9 +818,11 @@
             <h3>Fiesta</h3>
           </div>
 
-        </div>
+          <div class="timeline__connector fade-in"></div>
 
-        <p class="timeline__dresscode fade-in">Dress code: <span>Elegante / Semi-formal</span></p>
+          <p class="timeline__dresscode fade-in">Dress code: <span>Elegante / Semi-formal</span></p>
+
+        </div>
       </div>
     </section>
 
@@ -1014,8 +895,6 @@
   <footer class="footer">
     <p class="footer__names">Guadalupe &amp; Ayrton</p>
     <p class="footer__date">3 . 10 . 26</p>
-    <!-- CONFIGURAR: Reemplazar con la frase que quieran -->
-    <p class="footer__phrase">&ldquo;Acompañanos en nuestro sí para siempre&rdquo;</p>
   </footer>
 
   <!-- ============================================================
@@ -1045,17 +924,6 @@
           fadeObserver.observe(el);
         });
 
-        /* Chevron fade on scroll */
-        var heroChevron = document.getElementById('heroChevron');
-        var heroSection = document.getElementById('hero');
-        if (heroChevron && heroSection) {
-          var chevronObserver = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-              heroChevron.style.opacity = entry.isIntersecting ? '0.8' : '0';
-            });
-          }, { threshold: 0.5 });
-          chevronObserver.observe(heroSection);
-        }
       } else {
         // If reduced motion, show everything immediately
         document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(function (el) {
@@ -1063,28 +931,7 @@
         });
       }
 
-      /* ========================================
-         2. MUSIC TOGGLE
-         ======================================== */
-      var musicBtn = document.getElementById('musicBtn');
-      var audio = document.getElementById('bgMusic');
-
-      musicBtn.addEventListener('click', function () {
-        if (audio.paused) {
-          audio.play().then(function () {
-            musicBtn.classList.add('is-playing');
-            musicBtn.setAttribute('aria-label', 'Pausar música de fondo');
-          }).catch(function () {
-            // autoplay blocked — do nothing
-          });
-        } else {
-          audio.pause();
-          musicBtn.classList.remove('is-playing');
-          musicBtn.setAttribute('aria-label', 'Reproducir música de fondo');
-        }
-      });
-
-      /* ========================================
+/* ========================================
          3. COPY ALIAS
          ======================================== */
       var copyBtn = document.getElementById('copyBtn');
