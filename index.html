@@ -7,51 +7,12 @@
   <meta name="description" content="Casamiento de Guadalupe y Ayrton — 3 de Octubre, 2026">
   <meta property="og:title" content="Guadalupe & Ayrton — Nos Casamos">
   <meta property="og:description" content="3 de Octubre, 2026">
-  <meta property="og:image" content="https://chichex.github.io/espejo-atardecer.png">
+  <meta property="og:image" content="https://chichex.github.io/assets/espejo-atardecer.png">
   <meta property="og:url" content="https://chichex.github.io">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://chichex.github.io/espejo-atardecer.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Lavishly+Yours&family=Lexend+Zetta:wght@300;400&display=swap" rel="stylesheet">
+  <meta name="twitter:image" content="https://chichex.github.io/assets/espejo-atardecer.png">
   <style>
-    /* ========================================
-       FONTS
-       ======================================== */
-    @font-face {
-      font-family: 'Boheme Floral';
-      src: url('Boheme Floral.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    /* ========================================
-       DESIGN SYSTEM — CSS Variables
-       ======================================== */
-    :root {
-      --terracotta: #9C5540;
-      --dusty-rose: #DDBEA9;
-      --peach-cream: #FFE8D6;
-      --soft-apricot: #B7B7A4;
-      --olive-green: #6B705C;
-      --white: #FFFDF9;
-      --dark: #3D3A35;
-      --gold: #C9A96E;
-      --paper-bg: #F5F0E8;
-      --card-bg: #A5A58D;
-      --chalk-white: #FAF7F2;
-
-      --font-boheme: 'Boheme Floral', cursive;
-      --font-script: 'Lavishly Yours', cursive;
-      --font-serif: 'Cormorant Garamond', serif;
-      --font-sans: 'Lexend Zetta', sans-serif;
-    }
-
-    /* ========================================
-       RESET & BASE
-       ======================================== */
     *, *::before, *::after {
       margin: 0;
       padding: 0;
@@ -59,92 +20,137 @@
     }
 
     html {
-      scroll-behavior: smooth;
+      background-color: #F5F0E8;
     }
 
     body {
-      font-family: var(--font-serif);
-      font-weight: 400;
-      color: var(--terracotta);
-      background-color: #ffffff;
-      background-image: none;
-      line-height: 1.7;
+      margin: 0 auto;
+      max-width: 430px;
+      background-color: #F5F0E8;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Paper grain texture overlay */
-    body::after {
-      content: '';
+    /* ========================================
+       LOADER
+       ======================================== */
+    .loader {
       position: fixed;
       inset: 0;
-      pointer-events: none;
       z-index: 9999;
-      opacity: 0.05;
-      mix-blend-mode: multiply;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+      background: #F5F0E8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+    .loader.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .loader__spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid #DDBEA9;
+      border-top-color: #9C5540;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
-    img {
-      max-width: 100%;
-      height: auto;
+    /* ========================================
+       SITE WRAPPER
+       ======================================== */
+    .site {
+      position: relative;
+      width: 100%;
+      line-height: 0;
+    }
+
+    .site__image {
       display: block;
+      width: 100%;
+      height: auto;
+      position: relative;
+      z-index: 2;
+      pointer-events: none;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    /* ========================================
+       VIDEO (behind image, in transparent hole)
+       ======================================== */
+    .site__video {
+      position: absolute;
+      top: 12.46%;
+      left: 0;
+      width: 100%;
+      height: 19.61%;
+      object-fit: cover;
+      z-index: 1;
     }
 
-    button {
-      font-family: inherit;
+    /* ========================================
+       INTERACTIVE BUTTONS (invisible overlays)
+       ======================================== */
+    .site__btn {
+      position: absolute;
+      z-index: 3;
+      display: block;
       cursor: pointer;
+      background: transparent;
       border: none;
-      background: none;
+      padding: 0;
+      /* Center horizontally with consistent width */
+      left: 50%;
+      transform: translateX(-50%);
+      width: 35%;
+      height: 1.5%;
+      min-height: 44px;
+      /* Debug: uncomment to see button areas */
+      /* background: rgba(255, 0, 0, 0.2); */
     }
 
-    /* ========================================
-       TYPOGRAPHY
-       ======================================== */
-    .script {
-      font-family: var(--font-script);
-    }
-
-    .serif {
-      font-family: var(--font-serif);
-    }
-
-    .sans {
-      font-family: var(--font-sans);
-    }
-
-    h2.section-title {
-      font-family: var(--font-boheme);
-      font-size: clamp(2.4rem, 6vw, 3.5rem);
-      color: #756256;
-      text-align: center;
-      margin-bottom: 1rem;
-      line-height: 1.3;
-      font-weight: normal;
-    }
-
-    .section-subtitle {
-      font-family: var(--font-serif);
-      font-weight: 300;
-      font-size: 1.1rem;
-      text-align: center;
-      color: #756256;
-      margin-bottom: 2.5rem;
-    }
-
-    /* ========================================
-       FOCUS & ACCESSIBILITY
-       ======================================== */
-    :focus-visible {
-      outline: 2px solid var(--gold);
+    .site__btn:focus-visible {
+      outline: 2px solid #C9A96E;
       outline-offset: 3px;
     }
 
+    /* Button positions (Y center as % of total image height) */
+    .site__btn--ceremonia { top: 46.7%; transform: translateX(-50%) translateY(-50%); }
+    .site__btn--recepcion { top: 53.2%; transform: translateX(-50%) translateY(-50%); }
+    .site__btn--alias     { top: 77.9%; transform: translateX(-50%) translateY(-50%); }
+    .site__btn--guada     { top: 85.4%; transform: translateX(-50%) translateY(-50%); min-height: 38px; }
+    .site__btn--chiche    { top: 86.8%; transform: translateX(-50%) translateY(-50%); min-height: 38px; }
+
+    /* ========================================
+       COPY TOAST (feedback when alias copied)
+       ======================================== */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      background: #6B705C;
+      color: #FAF7F2;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 0.85rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      line-height: 1.4;
+    }
+    .toast.is-visible {
+      opacity: 1;
+    }
+
+    /* ========================================
+       ACCESSIBILITY
+       ======================================== */
     .sr-only {
       position: absolute;
       width: 1px;
@@ -156,811 +162,107 @@
       white-space: nowrap;
       border: 0;
     }
-
-    /* ========================================
-       SCROLL ANIMATIONS
-       ======================================== */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .fade-in.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .fade-in-left {
-      opacity: 0;
-      transform: translateX(-30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .fade-in-right {
-      opacity: 0;
-      transform: translateX(30px);
-      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    }
-
-    .fade-in-left.is-visible,
-    .fade-in-right.is-visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .fade-in,
-      .fade-in-left,
-      .fade-in-right {
-        opacity: 1;
-        transform: none;
-        transition: none;
-      }
-      .hero__title,
-      .hero__date {
-        animation: none !important;
-      }
-      .music-btn.is-playing .music-btn__ring {
-        animation: none !important;
-      }
-    }
-
-    /* ========================================
-       SECTION COMMON
-       ======================================== */
-    section {
-      padding: 2rem 1.25rem;
-      position: relative;
-    }
-
-    .section-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    /* ========================================
-       1. HERO — Paper invitation style
-       ======================================== */
-    .hero {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      padding: 0;
-      background-color: var(--paper-bg);
-    }
-
-    .hero__photo-wrapper {
-      position: relative;
-      width: 100%;
-      line-height: 0;
-      overflow: hidden;
-      aspect-ratio: 1724 / 3429;
-    }
-
-    /* Torn paper frame overlay on video */
-    .hero__photo-wrapper::before {
-      content: '';
-      position: absolute;
-      inset: -4px;
-      z-index: 3;
-      pointer-events: none;
-      background: url('papel rasgado doble más espacio - papel chico.png') center / calc(100% + 8px) calc(100% + 8px) no-repeat;
-    }
-
-    .hero__poster,
-    .hero__video {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: contain;
-      object-position: center;
-      background-color: var(--paper-bg);
-    }
-
-    .hero__video {
-      position: absolute;
-      inset: 0;
-      height: 100%;
-      width: 100%;
-      z-index: 1;
-    }
-
-    .hero__overlay-top {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 4;
-      text-align: center;
-      padding: 1.5rem 1.25rem 0;
-    }
-
-    .hero__overlay-bottom {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 4;
-      text-align: center;
-      padding: 0 1.25rem 2rem;
-    }
-
-    .hero__title {
-      font-family: var(--font-boheme);
-      font-size: clamp(2.5rem, 8vw, 4.5rem);
-      line-height: 1.3;
-      margin-bottom: 0.75rem;
-      color: #756256;
-      font-weight: normal;
-    }
-
-    .hero__date {
-      font-family: var(--font-sans);
-      font-weight: 300;
-      font-size: clamp(0.65rem, 1.5vw, 0.85rem);
-      letter-spacing: 0.35em;
-      color: #756256;
-    }
-
-    .hero__phrase {
-      font-family: var(--font-serif);
-      font-weight: 300;
-      font-style: italic;
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      color: #756256;
-      line-height: 1.6;
-    }
-
-    /* Hero stagger animations */
-    @keyframes heroFadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero__title {
-      animation: heroFadeIn 0.8s ease-out 0.3s both;
-    }
-
-    .hero__date {
-      animation: heroFadeIn 0.8s ease-out 0.6s both;
-    }
-
-    /* ========================================
-       3. CRONOGRAMA — TIMELINE (centered vertical)
-       ======================================== */
-    .timeline {
-      background-color: transparent;
-    }
-
-    .timeline__track {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-      margin: 0 -1.25rem;
-      background: linear-gradient(rgba(107,112,92,0.75), rgba(107,112,92,0.75)), url('papel fondo-01.png') center / cover;
-      padding: 2.5rem 1.5rem;
-      border-radius: 0;
-    }
-
-    .timeline__item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .timeline__icon {
-      width: 56px;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--chalk-white);
-    }
-
-    .timeline__icon svg {
-      width: 40px;
-      height: 40px;
-    }
-
-    .timeline__time {
-      font-family: var(--font-sans);
-      font-weight: 400;
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--chalk-white);
-      margin-top: 0.5rem;
-    }
-
-    .timeline__item h3 {
-      font-family: var(--font-serif);
-      font-weight: 600;
-      font-size: 1.3rem;
-      color: var(--chalk-white);
-      margin-top: 0.2rem;
-    }
-
-    .timeline__item p {
-      font-family: var(--font-serif);
-      font-weight: 300;
-      font-style: italic;
-      font-size: 0.95rem;
-      color: var(--chalk-white);
-      opacity: 0.85;
-      margin-top: 0.15rem;
-    }
-
-    .timeline__btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 0.75rem;
-      padding: 0.45rem 1.1rem;
-      font-family: var(--font-sans);
-      font-weight: 400;
-      font-size: 0.65rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--chalk-white);
-      background-color: transparent;
-      border: 1.5px solid var(--chalk-white);
-      border-radius: 4px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .timeline__btn:hover {
-      background-color: var(--chalk-white);
-      color: var(--card-bg);
-    }
-
-    .timeline__btn svg {
-      width: 14px;
-      height: 14px;
-    }
-
-    .timeline__connector {
-      width: 2px;
-      height: 50px;
-      background-color: var(--chalk-white);
-      opacity: 0.3;
-      margin: 0.75rem 0;
-    }
-
-    .timeline__dresscode {
-      text-align: center;
-      font-family: var(--font-sans);
-      font-weight: 300;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--chalk-white);
-      background: none;
-      padding: 0;
-    }
-
-    .timeline__dresscode span {
-      font-weight: 400;
-    }
-
-    /* ========================================
-       5. CONTACTO — WHATSAPP
-       ======================================== */
-    .contact {
-      background-color: transparent;
-    }
-
-    .contact__buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      align-items: center;
-      background-color: #ffffff;
-      padding: 2rem 1.5rem;
-      border-radius: 0;
-      margin: 0 -1.25rem;
-    }
-
-    .contact__btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.9rem 1.75rem;
-      font-family: var(--font-sans);
-      font-weight: 400;
-      font-size: 0.7rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--olive-green);
-      background: transparent;
-      border: 1.5px solid var(--olive-green);
-      border-radius: 4px;
-      transition: all 0.3s ease, transform 0.2s ease;
-      width: 100%;
-      justify-content: center;
-    }
-
-    .contact__btn:hover {
-      background-color: var(--olive-green);
-      color: var(--chalk-white);
-      transform: translateY(-1px);
-    }
-
-    .contact__btn svg {
-      width: 22px;
-      height: 22px;
-      flex-shrink: 0;
-    }
-
-    /* ========================================
-       6. DATOS DE REGALO
-       ======================================== */
-    .gift {
-      background-color: transparent;
-    }
-
-    .gift__card {
-      background-color: #ffffff;
-      border: none;
-      border-radius: 0;
-      margin: 0 -1.25rem;
-    }
-
-    .gift__card-inner {
-      border: none;
-      border-radius: 12px;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      background: transparent;
-    }
-
-    .gift__label {
-      font-family: var(--font-sans);
-      font-weight: 300;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--olive-green);
-      margin-bottom: 0.5rem;
-    }
-
-    .gift__alias {
-      font-family: var(--font-serif);
-      font-weight: 500;
-      font-size: 1.5rem;
-      color: var(--olive-green);
-      margin-bottom: 1.5rem;
-      word-break: break-all;
-    }
-
-    .gift__copy-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.65rem 1.5rem;
-      font-family: var(--font-sans);
-      font-weight: 400;
-      font-size: 0.7rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--olive-green);
-      background: transparent;
-      border: 1.5px solid var(--olive-green);
-      border-radius: 4px;
-      transition: all 0.3s ease, transform 0.2s ease;
-    }
-
-    .gift__copy-btn.is-bounce {
-      transform: scale(1.08);
-    }
-
-    .gift__copy-btn:hover {
-      background-color: var(--olive-green);
-      color: var(--chalk-white);
-    }
-
-    .gift__copy-btn svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .gift__copy-btn.is-copied {
-      background-color: var(--olive-green);
-      border-color: var(--olive-green);
-      color: var(--chalk-white);
-    }
-
-    .gift__feedback {
-      font-family: var(--font-sans);
-      font-size: 0.65rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--olive-green);
-      margin-top: 0.75rem;
-      min-height: 1.2em;
-    }
-
-    /* ========================================
-       7. FOOTER
-       ======================================== */
-    .footer {
-      background-color: var(--olive-green);
-      color: var(--chalk-white);
-      text-align: center;
-      padding: 3rem 1.25rem;
-    }
-
-    .footer__names {
-      font-family: var(--font-boheme);
-      font-size: 2.2rem;
-      font-weight: normal;
-      margin-bottom: 0.5rem;
-    }
-
-    .footer__date {
-      font-family: var(--font-sans);
-      font-weight: 300;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-
-
-    /* ========================================
-       DOT NAVIGATION (desktop)
-       ======================================== */
-    .dot-nav {
-      display: none;
-    }
-
-    @media (min-width: 768px) {
-      .dot-nav {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        position: fixed;
-        right: 1.5rem;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 90;
-      }
-
-      .dot-nav__item {
-        position: relative;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: var(--soft-apricot);
-        opacity: 0.5;
-        transition: all 0.3s ease;
-        cursor: pointer;
-      }
-
-      .dot-nav__item:hover,
-      .dot-nav__item.is-active {
-        opacity: 1;
-        background-color: var(--gold);
-        transform: scale(1.3);
-      }
-
-      .dot-nav__tooltip {
-        position: absolute;
-        right: 1.5rem;
-        top: 50%;
-        transform: translateY(-50%);
-        background: var(--dark);
-        color: var(--chalk-white);
-        font-family: var(--font-sans);
-        font-size: 0.6rem;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        padding: 0.3rem 0.6rem;
-        border-radius: 3px;
-        white-space: nowrap;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease;
-      }
-
-      .dot-nav__item:hover .dot-nav__tooltip {
-        opacity: 1;
-      }
-    }
-
-    /* ========================================
-       SECTION TRANSITIONS
-       ======================================== */
-    /* removed gift-to-footer gradient */
-
-    /* ========================================
-       RESPONSIVE
-       ======================================== */
-    @media (min-width: 1024px) {
-      section {
-        padding: 3rem 2rem;
-      }
-    }
   </style>
 </head>
 <body>
 
+  <!-- LOADER -->
+  <div class="loader" id="loader" aria-label="Cargando">
+    <div class="loader__spinner"></div>
+  </div>
 
-  <!-- ======== DOT NAVIGATION ======== -->
-  <nav class="dot-nav" id="dotNav" aria-label="Navegación por secciones">
-    <a href="#hero" class="dot-nav__item is-active" aria-label="Inicio">
-      <span class="dot-nav__tooltip">Inicio</span>
+  <!-- SITE -->
+  <div class="site">
+
+    <!-- Video (behind image, visible through transparent hole) -->
+    <video class="site__video" muted autoplay loop playsinline preload="metadata"
+           poster="assets/espejo-atardecer.png">
+      <source src="assets/hero-video.mp4" type="video/mp4">
+    </video>
+
+    <!-- Full design image -->
+    <picture>
+      <source media="(max-width: 375px)" srcset="assets/tarjeta%20resolucion%20375%20px_-02-02.png">
+      <img class="site__image" src="assets/tarjeta%20resolucion%20430%20px_g_Mesa%20de%20trabajo%201.png"
+           alt="Invitación de casamiento de Guadalupe y Ayrton — 3 de Octubre, 2026">
+    </picture>
+
+    <!-- Interactive buttons (invisible, overlaid on clickable areas) -->
+    <a class="site__btn site__btn--ceremonia"
+       href="https://maps.google.com/?q=Iglesia+Catedral+San+Luis+Argentina"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Cómo llegar a la Ceremonia — Iglesia Catedral, San Luis">
     </a>
-    <a href="#timeline" class="dot-nav__item" aria-label="Cronograma">
-      <span class="dot-nav__tooltip">Cronograma</span>
+
+    <a class="site__btn site__btn--recepcion"
+       href="https://maps.google.com/?q=Mirna+Eventos+San+Luis+Argentina"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Cómo llegar a la Recepción — Salón Mirna Eventos">
     </a>
-    <a href="#contact" class="dot-nav__item" aria-label="Contacto">
-      <span class="dot-nav__tooltip">Contacto</span>
+
+    <button class="site__btn site__btn--alias" id="copyBtn" type="button"
+            aria-label="Copiar alias ayrtonmarini.mp al portapapeles">
+    </button>
+
+    <a class="site__btn site__btn--guada"
+       href="https://wa.me/5492664301974"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Confirmar asistencia con Guada por WhatsApp">
     </a>
-    <a href="#gift" class="dot-nav__item" aria-label="Regalo">
-      <span class="dot-nav__tooltip">Regalo</span>
+
+    <a class="site__btn site__btn--chiche"
+       href="https://wa.me/598098145888"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Confirmar asistencia con Chiche por WhatsApp">
     </a>
-  </nav>
 
-  <main>
+  </div>
 
-    <!-- ============================================================
-         1. HERO
-         ============================================================ -->
-    <section class="hero" id="hero">
-      <div class="hero__photo-wrapper">
-        <img class="hero__poster" src="espejo-atardecer.png" alt="Guadalupe y Ayrton — Nos casamos">
-        <video class="hero__video" muted autoplay loop playsinline preload="metadata"
-               poster="espejo-atardecer.png">
-          <source src="hero-video.mp4" type="video/mp4">
-        </video>
+  <!-- Toast for clipboard feedback -->
+  <div class="toast" id="toast" aria-live="polite"></div>
 
-        <!-- Texto superpuesto sobre el video -->
-        <div class="hero__overlay-top">
-          <h1 class="hero__title">Guadalupe y Ayrton</h1>
-          <p class="hero__date">3 . 10 . 26</p>
-        </div>
-        <div class="hero__overlay-bottom">
-          <p class="hero__phrase">Acompañanos en nuestro sí para siempre.</p>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ============================================================
-         3. CRONOGRAMA
-         ============================================================ -->
-    <section class="timeline" id="timeline">
-      <div class="section-inner">
-        <h2 class="section-title fade-in">Cronograma</h2>
-        <p class="section-subtitle fade-in">Los esperamos para celebrar juntos</p>
-
-        <div class="timeline__track">
-
-          <!-- 1. Ceremonia Religiosa -->
-          <div class="timeline__item fade-in">
-            <div class="timeline__icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 2v6m-3-3h6m-3 3v12m-5 0h10m-10 0v-5a5 5 0 0 1 10 0v5"/>
-              </svg>
-            </div>
-            <span class="timeline__time">17:00 hs</span>
-            <h3>Ceremonia Religiosa</h3>
-            <p>Iglesia Catedral, San Luis</p>
-            <a href="https://maps.google.com/?q=Iglesia+Catedral+San+Luis+Argentina" target="_blank" rel="noopener noreferrer" class="timeline__btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg>
-              Cómo llegar
-            </a>
-          </div>
-
-          <div class="timeline__connector fade-in"></div>
-
-          <!-- 2. Coctel -->
-          <div class="timeline__item fade-in">
-            <div class="timeline__icon">
-              <!-- Champagne glasses -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M8 2h8l-1 9a5 5 0 0 1-3 4.5 5 5 0 0 1-3-4.5L8 2z"/>
-                <line x1="12" y1="15.5" x2="12" y2="20"/>
-                <line x1="8" y1="22" x2="16" y2="22"/>
-              </svg>
-            </div>
-            <span class="timeline__time">18:30 hs</span>
-            <h3>Coctel</h3>
-            <p>Mirna Eventos</p>
-            <a href="https://maps.google.com/?q=Mirna+Eventos+San+Luis+Argentina" target="_blank" rel="noopener noreferrer" class="timeline__btn">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/>
-                <circle cx="12" cy="10" r="3"/>
-              </svg>
-              Cómo llegar
-            </a>
-          </div>
-
-          <div class="timeline__connector fade-in"></div>
-
-          <!-- 3. Cena -->
-          <div class="timeline__item fade-in">
-            <div class="timeline__icon">
-              <!-- Plate with cutlery -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="8"/>
-                <path d="M7 5v4a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V5"/>
-                <line x1="9" y1="5" x2="9" y2="11"/>
-                <path d="M15 5c0 0 1.5 1.5 1.5 4s-1.5 3-1.5 3"/>
-                <line x1="15" y1="12" x2="15" y2="19"/>
-                <line x1="9" y1="11" x2="9" y2="19"/>
-              </svg>
-            </div>
-            <span class="timeline__time">20:00 hs</span>
-            <h3>Cena</h3>
-          </div>
-
-          <div class="timeline__connector fade-in"></div>
-
-          <!-- 4. Fiesta -->
-          <div class="timeline__item fade-in">
-            <div class="timeline__icon">
-              <!-- Party/celebration icon -->
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
-                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                <line x1="9" y1="9" x2="9.01" y2="9"/>
-                <line x1="15" y1="9" x2="15.01" y2="9"/>
-              </svg>
-            </div>
-            <span class="timeline__time">21:30 hs</span>
-            <h3>Fiesta</h3>
-          </div>
-
-          <div class="timeline__connector fade-in"></div>
-
-          <p class="timeline__dresscode fade-in">Dress code: <span>Elegante / Semi-formal</span></p>
-
-        </div>
-      </div>
-    </section>
-
-
-
-
-    <!-- ============================================================
-         5. CONTACTO
-         ============================================================ -->
-    <section class="contact" id="contact">
-      <div class="section-inner">
-        <h2 class="section-title fade-in">Contacto</h2>
-        <p class="section-subtitle fade-in">Si tenés alguna consulta, escribinos</p>
-
-        <div class="contact__buttons fade-in">
-          <a href="https://wa.me/598098145888" target="_blank" rel="noopener noreferrer" class="contact__btn" aria-label="Enviar mensaje de WhatsApp a Chiche">
-            <!-- WhatsApp icon -->
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-            </svg>
-            Escribile a Chiche
-          </a>
-          <a href="https://wa.me/5492664301974" target="_blank" rel="noopener noreferrer" class="contact__btn" aria-label="Enviar mensaje de WhatsApp a Guada">
-            <!-- WhatsApp icon -->
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
-            </svg>
-            Escribile a Guada
-          </a>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ============================================================
-         6. DATOS DE REGALO
-         ============================================================ -->
-    <section class="gift" id="gift">
-      <div class="section-inner">
-        <h2 class="section-title fade-in">Si querés hacernos un regalo</h2>
-        <p class="section-subtitle fade-in">Tu presencia es nuestro mejor regalo, pero si querés tener un detalle</p>
-
-        <div class="gift__card fade-in">
-          <div class="gift__card-inner">
-            <p class="gift__label">Alias</p>
-            <p class="gift__alias">ayrtonmarini.mp</p>
-            <button class="gift__copy-btn" id="copyBtn" type="button" aria-label="Copiar alias al portapapeles">
-              <!-- Clipboard icon -->
-              <svg class="gift__copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
-                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-              </svg>
-              <!-- Checkmark icon (hidden) -->
-              <svg class="gift__check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none;">
-                <polyline points="20 6 9 17 4 12"/>
-              </svg>
-              <span class="gift__copy-label">Copiar alias</span>
-            </button>
-            <p class="gift__feedback" id="copyFeedback" aria-live="polite"></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ============================================================
-       7. FOOTER
-       ============================================================ -->
-  <footer class="footer">
-    <p class="footer__names">Guadalupe &amp; Ayrton</p>
-    <p class="footer__date">3 . 10 . 26</p>
-  </footer>
-
-  <!-- ============================================================
-       JAVASCRIPT
-       ============================================================ -->
+  <!-- JAVASCRIPT -->
   <script>
     (function () {
       'use strict';
 
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
       /* ========================================
-         1. SCROLL ANIMATIONS (IntersectionObserver)
+         LOADER
          ======================================== */
-      if (!prefersReducedMotion) {
-        const fadeEls = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right');
-        const fadeObserver = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              fadeObserver.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.15 });
+      var loader = document.getElementById('loader');
 
-        fadeEls.forEach(function (el) {
-          fadeObserver.observe(el);
-        });
-
-      } else {
-        // If reduced motion, show everything immediately
-        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(function (el) {
-          el.classList.add('is-visible');
-        });
+      function hideLoader() {
+        if (loader.classList.contains('is-hidden')) return;
+        loader.classList.add('is-hidden');
+        loader.addEventListener('transitionend', function () {
+          loader.remove();
+        }, { once: true });
       }
 
-/* ========================================
-         3. COPY ALIAS
+      window.addEventListener('load', hideLoader);
+      setTimeout(hideLoader, 8000);
+
+      /* ========================================
+         COPY ALIAS
          ======================================== */
       var copyBtn = document.getElementById('copyBtn');
-      var copyFeedback = document.getElementById('copyFeedback');
-      var copyIcon = copyBtn.querySelector('.gift__copy-icon');
-      var checkIcon = copyBtn.querySelector('.gift__check-icon');
-      var copyLabel = copyBtn.querySelector('.gift__copy-label');
-      var copyTimeout;
+      var toast = document.getElementById('toast');
+      var toastTimeout;
+
+      function showToast(message) {
+        clearTimeout(toastTimeout);
+        toast.textContent = message;
+        toast.classList.add('is-visible');
+        toastTimeout = setTimeout(function () {
+          toast.classList.remove('is-visible');
+        }, 2500);
+      }
 
       copyBtn.addEventListener('click', function () {
         var alias = 'ayrtonmarini.mp';
 
         function onSuccess() {
-          clearTimeout(copyTimeout);
-          copyBtn.classList.add('is-copied');
-          copyBtn.classList.add('is-bounce');
-          setTimeout(function () { copyBtn.classList.remove('is-bounce'); }, 200);
-          copyIcon.style.display = 'none';
-          checkIcon.style.display = 'block';
-          copyLabel.textContent = '¡Copiado!';
-          copyFeedback.textContent = '¡Alias copiado al portapapeles!';
-
-          copyTimeout = setTimeout(function () {
-            copyBtn.classList.remove('is-copied');
-            copyIcon.style.display = 'block';
-            checkIcon.style.display = 'none';
-            copyLabel.textContent = 'Copiar alias';
-            copyFeedback.textContent = '';
-          }, 2500);
+          showToast('¡Alias copiado al portapapeles!');
         }
 
         if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -984,44 +286,10 @@
           document.execCommand('copy');
           cb();
         } catch (e) {
-          copyFeedback.textContent = 'No se pudo copiar. Copiá manualmente: ' + text;
+          showToast('No se pudo copiar. Copiá manualmente: ' + text);
         }
         document.body.removeChild(textarea);
       }
-
-      /* ========================================
-         4. DOT NAV ACTIVE STATE
-         ======================================== */
-      var dotItems = document.querySelectorAll('.dot-nav__item');
-      var sections = document.querySelectorAll('section[id]');
-
-      var navObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            var id = entry.target.getAttribute('id');
-            dotItems.forEach(function (dot) {
-              dot.classList.toggle('is-active', dot.getAttribute('href') === '#' + id);
-            });
-          }
-        });
-      }, { threshold: 0.4 });
-
-      sections.forEach(function (section) {
-        navObserver.observe(section);
-      });
-
-      /* ========================================
-         5. SMOOTH SCROLL (anchors)
-         ======================================== */
-      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          var target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
-        });
-      });
 
     })();
   </script>

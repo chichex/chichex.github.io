@@ -13,7 +13,7 @@ Static single-page wedding website for Guadalupe & Ayrton. Everything lives in a
 
 Serve locally with any HTTP server:
 ```bash
-python3 -m http.server 8000
+python3 -m http.server 8888
 # or
 npx http-server
 ```
@@ -26,30 +26,55 @@ There are no tests, linting, or build steps.
 
 **Structure:** `<style>` block → HTML body → `<script>` IIFE (bottom of file)
 
-**Sections in order:**
-1. **Hero** (`#hero`) — Torn paper frame (`papel rasgado doble más espacio - papel chico.png`) overlaying video/poster (`espejo-atardecer.png`). Title and phrase are positioned absolutely over the video inside `.hero__overlay-top` and `.hero__overlay-bottom` (z-index 4, above the torn paper overlay at z-index 3). Uses `aspect-ratio: 1724/3429` to match the paper image proportions. Video uses `object-fit: contain`.
-2. **Timeline/Cronograma** (`#timeline`) — Wedding schedule with Google Maps links. Olive green card with paper texture. Dress code integrated inside the timeline track.
-3. **Contact** (`#contact`) — WhatsApp deeplinks. White card, outline-style buttons.
-4. **Gift** (`#gift`) — Mercado Pago alias with copy-to-clipboard. White card, outline-style buttons.
-5. **Footer** — Olive green background with couple names and date.
+**Approach:** The entire design is a single full-height image with a video behind a transparent hole and invisible interactive buttons overlaid on the clickable areas of the image.
 
-**CSS design system** uses custom properties in `:root` for a warm/earthy palette (terracotta `#9C5540`, olive green `#6B705C`, paper-bg `#F5F0E8`, chalk-white `#FAF7F2`, gold `#C9A96E`). Typography: Boheme Floral (custom TTF for titles), Lavishly Yours (script), Cormorant Garamond (serif body), Lexend Zetta (sans labels). Uses `clamp()` for fluid scaling. Responsive breakpoints at 768px and 1024px.
-
-**JavaScript features:** Intersection Observer scroll animations (`.fade-in`, `.fade-in-left`, `.fade-in-right`), clipboard copy with fallback, desktop dot navigation, reduced-motion support.
+**HTML structure:**
+```
+<div class="site">                    (relative wrapper, max-width: 430px)
+  <video>                             (z-index: 1, absolute, in transparent hole)
+  <picture><img>                      (z-index: 2, pointer-events: none, full design)
+  <a> Cómo llegar Ceremonia           (z-index: 3, invisible overlay button)
+  <a> Cómo llegar Recepción           (z-index: 3, invisible overlay button)
+  <button> Copiar ALIAS               (z-index: 3, invisible overlay button)
+  <a> Confirmar a Guada               (z-index: 3, invisible overlay button)
+  <a> Confirmar a Chiche              (z-index: 3, invisible overlay button)
+</div>
+```
 
 **Key assets:**
-- `Boheme Floral.ttf` — Custom font for titles
-- `espejo-atardecer.png` — Hero poster/fallback image
-- `hero-video.mp4` — Hero background video
-- `papel rasgado doble más espacio - papel chico.png` — Torn paper frame overlay for hero
-- `papel fondo-01.png` — Paper texture used in timeline background
+- `assets/tarjeta resolucion 430 px_g_Mesa de trabajo 1.png` (1792x12281px) — Main design image for 430px screens
+- `assets/tarjeta resolucion 375 px_-02-02.png` (1564x10974px) — Responsive variant for ≤375px screens
+- `assets/hero-video.mp4` — Video visible through transparent hole in image
+- `assets/espejo-atardecer.png` — Video poster/fallback
+
+**Button positions (% of image height, centered horizontally at 35% width):**
+| Button | Y center | Target |
+|---|---|---|
+| Cómo llegar (Ceremonia) | 46.7% | Google Maps: Iglesia Catedral San Luis |
+| Cómo llegar (Recepción) | 53.2% | Google Maps: Mirna Eventos |
+| Copiar ALIAS | 77.9% | Clipboard: `ayrtonmarini.mp` |
+| Confirmar a Guada | 85.4% | WhatsApp: wa.me/5492664301974 |
+| Confirmar a Chiche | 86.8% | WhatsApp: wa.me/598098145888 |
+
+**Video hole position:** `top: 12.46%; height: 19.61%; width: 100%; object-fit: cover`
+
+**JavaScript features:** Loader (spinner until `window.load`, 8s timeout), clipboard copy with navigator.clipboard API + fallback, toast feedback.
+
+**Loading:** Full-page spinner (`#loader`) blocks rendering until `window.load` fires (8s safety timeout).
 
 ## Key Conventions
 
-- Mobile-first responsive design
-- Accessibility: ARIA labels, `aria-live` for dynamic content, `.sr-only` class, `prefers-reduced-motion` support, `:focus-visible` styling
-- SVG icons are inlined directly in HTML
-- Decorative paper-grain texture via SVG filter data URI on `body::after`
+- Mobile-only layout (`max-width: 430px` on body)
+- Responsive via `<picture>` with `<source media="(max-width: 375px)">`
+- All visual content is in the image — buttons are invisible overlays (`background: transparent; border: none`)
+- Accessibility: ARIA labels on all interactive elements, `aria-live` toast, `.sr-only` class, `:focus-visible` styling
 - Commit messages in Spanish
-- Contact and gift cards use white (`#ffffff`) backgrounds with outline-style buttons
-- Timeline card uses olive green with paper texture: `linear-gradient(rgba(107,112,92,0.75), ...), url('papel fondo-01.png')`
+- Filenames with spaces must be URL-encoded in `srcset` attributes (use `%20`)
+
+## CSS Gotchas
+
+- **Button positions**: All buttons use `position: absolute` with `top` in percentages relative to the image. If the design image changes, re-measure Y positions
+- **Measuring transparent holes**: Don't estimate — render image to `<canvas>` and scan for alpha < 128 to find exact transparent pixel ranges. Estimated values can be off by ~1%
+- **Z-index stack**: video (1) → image (2, pointer-events: none) → buttons (3)
+- **Guada/Chiche overlap**: These buttons are only 1.4% apart; they use `min-height: 38px` (instead of 44px) to avoid overlap
+- **srcset spaces**: Filenames with spaces break `srcset` parsing — always encode as `%20`
