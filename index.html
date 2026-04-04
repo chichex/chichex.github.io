@@ -83,10 +83,10 @@
        ======================================== */
     .site__video {
       position: absolute;
-      top: 12.46%;
+      top: 10.25%;
       left: 0;
       width: 100%;
-      height: 19.61%;
+      height: 17.47%;
       object-fit: cover;
       z-index: 1;
     }
@@ -118,11 +118,11 @@
     }
 
     /* Button positions (Y center as % of total image height) */
-    .site__btn--ceremonia { top: 46.7%; transform: translateX(-50%) translateY(-50%); }
-    .site__btn--recepcion { top: 53.2%; transform: translateX(-50%) translateY(-50%); }
-    .site__btn--alias     { top: 77.9%; transform: translateX(-50%) translateY(-50%); }
-    .site__btn--guada     { top: 85.4%; transform: translateX(-50%) translateY(-50%); min-height: 38px; }
-    .site__btn--chiche    { top: 86.8%; transform: translateX(-50%) translateY(-50%); min-height: 38px; }
+    .site__btn--ceremonia { top: 47.3%; transform: translateX(-50%) translateY(-50%); }
+    .site__btn--recepcion { top: 54.1%; transform: translateX(-50%) translateY(-50%); }
+    .site__btn--alias     { top: 77.6%; transform: translateX(-50%) translateY(-50%); }
+    .site__btn--guada     { top: 86.2%; transform: translateX(-50%) translateY(-50%); min-height: 38px; }
+    .site__btn--chiche    { top: 87.6%; transform: translateX(-50%) translateY(-50%); min-height: 38px; }
 
     /* ========================================
        COPY TOAST (feedback when alias copied)
@@ -146,6 +146,62 @@
     }
     .toast.is-visible {
       opacity: 1;
+    }
+
+    /* ========================================
+       MUSIC TOGGLE
+       ======================================== */
+    .music-btn {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 50;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 169, 110, 0.4);
+      background: rgba(245, 240, 232, 0.9);
+      backdrop-filter: blur(6px);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+    }
+    .music-btn:active {
+      transform: scale(0.92);
+    }
+
+    .music-btn__bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 16px;
+    }
+    .music-btn__bar {
+      width: 3px;
+      background: #9C5540;
+      border-radius: 1px;
+    }
+
+    /* Paused state: static bars */
+    .music-btn--paused .music-btn__bar:nth-child(1) { height: 6px; }
+    .music-btn--paused .music-btn__bar:nth-child(2) { height: 10px; }
+    .music-btn--paused .music-btn__bar:nth-child(3) { height: 4px; }
+    .music-btn--paused .music-btn__bar:nth-child(4) { height: 8px; }
+
+    /* Playing state: animated bars */
+    .music-btn--playing .music-btn__bar {
+      animation: bar-bounce 0.8s ease-in-out infinite alternate;
+    }
+    .music-btn--playing .music-btn__bar:nth-child(1) { height: 6px; animation-delay: 0s; }
+    .music-btn--playing .music-btn__bar:nth-child(2) { height: 10px; animation-delay: 0.15s; }
+    .music-btn--playing .music-btn__bar:nth-child(3) { height: 4px; animation-delay: 0.3s; }
+    .music-btn--playing .music-btn__bar:nth-child(4) { height: 8px; animation-delay: 0.45s; }
+
+    @keyframes bar-bounce {
+      0%   { height: 4px; }
+      100% { height: 16px; }
     }
 
     /* ========================================
@@ -182,8 +238,7 @@
 
     <!-- Full design image -->
     <picture>
-      <source media="(max-width: 375px)" srcset="assets/tarjeta%20resolucion%20375%20px_-02-02.png">
-      <img class="site__image" src="assets/tarjeta%20resolucion%20430%20px_g_Mesa%20de%20trabajo%201.png"
+      <img class="site__image" src="assets/Invitaci%C3%B3n%20-%20430%20pxl-01.png"
            alt="Invitación de casamiento de Guadalupe y Ayrton — 3 de Octubre, 2026">
     </picture>
 
@@ -216,7 +271,23 @@
        aria-label="Confirmar asistencia con Chiche por WhatsApp">
     </a>
 
+
   </div>
+
+  <!-- Music toggle -->
+  <button class="music-btn music-btn--paused" id="musicBtn" type="button"
+          aria-label="Reproducir música">
+    <span class="music-btn__bars">
+      <span class="music-btn__bar"></span>
+      <span class="music-btn__bar"></span>
+      <span class="music-btn__bar"></span>
+      <span class="music-btn__bar"></span>
+    </span>
+  </button>
+
+  <audio id="musicAudio" loop preload="auto">
+    <source src="assets/selfless.mp3" type="audio/mpeg">
+  </audio>
 
   <!-- Toast for clipboard feedback -->
   <div class="toast" id="toast" aria-live="polite"></div>
@@ -290,6 +361,26 @@
         }
         document.body.removeChild(textarea);
       }
+
+      /* ========================================
+         MUSIC TOGGLE
+         ======================================== */
+      var musicBtn = document.getElementById('musicBtn');
+      var musicAudio = document.getElementById('musicAudio');
+
+      musicBtn.addEventListener('click', function () {
+        if (musicAudio.paused) {
+          musicAudio.play();
+          musicBtn.classList.remove('music-btn--paused');
+          musicBtn.classList.add('music-btn--playing');
+          musicBtn.setAttribute('aria-label', 'Pausar música');
+        } else {
+          musicAudio.pause();
+          musicBtn.classList.remove('music-btn--playing');
+          musicBtn.classList.add('music-btn--paused');
+          musicBtn.setAttribute('aria-label', 'Reproducir música');
+        }
+      });
 
     })();
   </script>
